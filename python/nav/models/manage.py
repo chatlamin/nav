@@ -943,7 +943,7 @@ class Room(models.Model):
     """From NAV Wiki: The room table defines a wiring closes / network room /
     server room."""
 
-    id = models.CharField(db_column='roomid', max_length=30, primary_key=True)
+    id = models.CharField(db_column='roomid', max_length=255, primary_key=True)
     location = models.ForeignKey(
         'Location',
         on_delete=models.CASCADE,
@@ -1009,7 +1009,7 @@ class Location(models.Model, TreeMixin):
     """The location table defines a group of rooms; i.e. a campus."""
 
     id = models.CharField(db_column='locationid',
-                          max_length=30, primary_key=True)
+                          max_length=255, primary_key=True)
     parent = models.ForeignKey(
         'self',
         on_delete=models.CASCADE,
