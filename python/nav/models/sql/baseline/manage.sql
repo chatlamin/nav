@@ -38,7 +38,7 @@ CREATE TABLE usage (
 
 
 CREATE TABLE location (
-  locationid VARCHAR(30) PRIMARY KEY,
+  locationid VARCHAR(255) PRIMARY KEY,
   descr VARCHAR DEFAULT '',
   data hstore DEFAULT hstore('') NOT NULL,
   parent VARCHAR REFERENCES location(locationid) ON UPDATE CASCADE
@@ -46,8 +46,8 @@ CREATE TABLE location (
 INSERT INTO location (locationid, descr) VALUES ('mylocation', 'Example location');
 
 CREATE TABLE room (
-  roomid VARCHAR(30) PRIMARY KEY,
-  locationid VARCHAR(30) REFERENCES location,
+  roomid VARCHAR(255) PRIMARY KEY,
+  locationid VARCHAR(255) REFERENCES location,
   descr VARCHAR,
   position POINT,
   data hstore NOT NULL DEFAULT hstore('')
@@ -132,7 +132,7 @@ CREATE TABLE type (
 CREATE TABLE netbox (
   netboxid SERIAL PRIMARY KEY,
   ip INET NOT NULL,
-  roomid VARCHAR(30) NOT NULL CONSTRAINT netbox_roomid_fkey REFERENCES room ON UPDATE CASCADE,
+  roomid VARCHAR(255) NOT NULL CONSTRAINT netbox_roomid_fkey REFERENCES room ON UPDATE CASCADE,
   typeid INT4 CONSTRAINT netbox_typeid_fkey REFERENCES type ON UPDATE CASCADE ON DELETE CASCADE,
   sysname VARCHAR UNIQUE NOT NULL,
   catid VARCHAR(8) NOT NULL CONSTRAINT netbox_catid_fkey REFERENCES cat ON UPDATE CASCADE ON DELETE CASCADE,
@@ -428,7 +428,7 @@ CREATE VIEW interface_gwport AS (
 
 CREATE TABLE cabling (
   cablingid SERIAL PRIMARY KEY,
-  roomid VARCHAR(30) NOT NULL REFERENCES room ON UPDATE CASCADE ON DELETE CASCADE,
+  roomid VARCHAR(255) NOT NULL REFERENCES room ON UPDATE CASCADE ON DELETE CASCADE,
   jack VARCHAR NOT NULL,
   building VARCHAR NOT NULL,
   targetroom VARCHAR NOT NULL,
